@@ -7,7 +7,7 @@ const htmlRoutes = require('./routes/htmlRoutes');
 require('dotenv').config()
 
 // Set up Express
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 // Set up morgan
@@ -16,6 +16,7 @@ app.use(morgan('dev'));
 // Set up Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Set up Express app to server static files
 app.use(express.static('public'));
 
@@ -31,10 +32,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
 	useUnifiedTopology: true,
 	useCreateIndex: true,
 	useFindAndModify: false
-}
-);
+});
 
 // Listener
 app.listen(PORT, () => {
-	console.log(`App running on port ${PORT}!`);
+	console.log(`App running on port ${PORT}`);
 });
