@@ -114,9 +114,15 @@ async function handleFormSubmit(event) {
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
 
-  await API.addExercise(workoutData);
-  clearInputs();
-  toast.classList.add("success");
+  if (workoutData.name) {
+    await API.addExercise(workoutData);
+    clearInputs();
+    toast.classList.add("success");
+  } else {
+    if (shouldNavigateAway) {
+      location.href = "/";
+    }
+  }
 }
 
 function handleToastAnimationEnd() {
@@ -154,3 +160,4 @@ toast.addEventListener("animationend", handleToastAnimationEnd);
 document
   .querySelectorAll("input")
   .forEach(element => element.addEventListener("input", validateInputs));
+  
